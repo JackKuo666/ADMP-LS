@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 客户端服务 - Python 3.11
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "8501:8501"
+    environment:
+      - PORT=8501
+    depends_on:
+      - retrieve
+      - review
+    networks:
+      - mcp-network
+
+  # Retrieve服务 - Python 3.11 + 特殊依赖
+  retrieve:
+    build:
+      context: .
+      dockerfile: Dockerfile.retrieve
+    ports:
+      - "9487:9487"
+    networks:
+      - mcp-network
+    environment:
+      - PYTHONPATH=/app
+
+  # Review服务 - Python 3.11
+  review:
+    build:
+      context: .
+      dockerfile: Dockerfile.review
+    ports:
+      - "8880:8880"
+    networks:
+      - mcp-network
+    environment:
+      - PYTHONPATH=/app
+
+networks:
+  mcp-network:
+    driver: bridge 

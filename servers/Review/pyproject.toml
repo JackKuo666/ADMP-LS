@@ -1,0 +1,21 @@
+[project]
+name = "bio-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.12.15",
+    "fastapi-mcp>=0.4.0",
+    "openai==1.81.0",
+    "openai-agents==0.0.16",
+    "typing>=3.10.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "ruff>=0.12.8",
+    "trio>=0.30.0",
+]

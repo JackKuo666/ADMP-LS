@@ -1,0 +1,80 @@
+qa-llm:
+  main:
+    model: deepseek-r1
+    api_key: ${QA_LLM_MAIN_API_KEY}
+    base_url: ${QA_LLM_MAIN_BASE_URL}
+    max_tokens: 1024
+    temperature: 0.7
+  backup:
+    model: qwen-plus-latest
+    api_key: ${QA_LLM_BACKUP_API_KEY}
+    base_url: ${QA_LLM_BACKUP_BASE_URL}
+    max_tokens: 1024
+    temperature: 0.7
+
+rewrite-llm:
+  backup:
+    model: gpt-4o
+    api_key: ${REWRITE_LLM_BACKUP_API_KEY}
+    base_url: ${REWRITE_LLM_BACKUP_BASE_URL}
+    max_tokens: 1024
+    temperature: 0.7
+  main:
+    model: qwen-plus-latest
+    api_key: ${REWRITE_LLM_MAIN_API_KEY}
+    base_url: ${REWRITE_LLM_MAIN_BASE_URL}
+    max_tokens: 1024
+    temperature: 0.7
+
+recall:
+  pubmed_topk: 30
+  es_topk: 30
+
+qa-topk:
+  personal_vector: 40
+  pubmed: 10
+  web: 5
+
+qa-prompt-max-token:
+  max_tokens: 120000
+
+web_search:
+  serper_api_key: ${SERPER_API_KEY}
+
+chat:
+  rag_prompt: |
+    # The following contents are the search results related to the user's message:
+        {search_results}
+        In the search results I provide to you, each result is formatted as [document X begin]...[document X end], where X represents the numerical index of each article. 
+        When responding, please keep the following points in mind:
+        - Today is {cur_date}.
+        - Not all content in the search results is closely related to the user's question. You need to evaluate and filter the search results based on the question.
+        - Before answering, evaluate the quality and sufficiency of the search results:
+          * If search results contain conflicting information, explicitly acknowledge the contradictions and explain the different perspectives
+          * If evidence is insufficient or weak, clearly state the limitations of the available information
+          * If multiple sources provide different conclusions, present them as alternative viewpoints rather than definitive answers
+        - Conduct answerability assessment for each question:
+          * If the question requires information not present in the search results, explicitly state this limitation
+          * If the available evidence only partially addresses the question, clearly indicate what aspects can and cannot be answered
+          * If the question is beyond the scope of the search results, suggest alternative approaches or information sources
+        - When evidence is insufficient or contradictory, use uncertainty indicators:
+          * Start responses with phrases like "Based on the limited available evidence..." or "The search results suggest..."
+          * Use qualifying language such as "appears to indicate," "may suggest," or "tends to show"
+          * Explicitly state confidence levels: "high confidence," "moderate confidence," or "low confidence"
+          * Include disclaimers about the limitations of the available information
+        - When encountering conflicting information in search results:
+          * Present both viewpoints with equal weight
+          * Explain the potential reasons for discrepancies (methodology differences, time periods, sample sizes, etc.)
+          * Avoid taking sides unless one source is clearly more authoritative or recent
+          * Recommend seeking additional sources for clarification when contradictions are significant
+        - If all the search results are irrelevant, please answer the question by yourself  professionally and concisely.
+        - The search results may focus only on a few points, use the information it provided, but do not favor those points in your answer, reason and answer by yourself all-sidedly with full consideration. 
+        - For listing-type questions (e.g., listing all flight information), try to limit the answer to 10 key points and inform the user that they can refer to the search sources for complete information. Prioritize providing the most complete and relevant items in the list. Avoid mentioning content not provided in the search results unless necessary.
+        - If the response is lengthy, structure it well and summarize it in paragraphs. If a point-by-point format is needed, try to limit it to 5 points and merge related content.
+        - For objective Q&A, if the answer is very brief, you may add one or two related sentences to enrich the content.
+        - Choose an appropriate and visually appealing format for your response based on the user's requirements and the content of the answer, ensuring strong readability.
+        - Your answer should synthesize information from multiple relevant documents.
+        - Unless the user requests otherwise, your response should be in the same language as the user's question.
+        # The user's message is:
+        {question}
+        - The content should be concise and direct, and you MUST include proper citations using ONLY "[bio-rag-citation:X]" format reference marks to indicate the sources of your information. Do NOT use any other citation formats such as [document X], [Author, Year], or parenthetical bibliographical references.

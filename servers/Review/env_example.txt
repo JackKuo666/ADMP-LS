@@ -1,0 +1,23 @@
+# Review Service Environment Variables Configuration Example
+
+# OpenAI Configuration
+OPENAI_BASE_URL=https://api.openai.com/v1
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Qianwen Configuration
+QIANWEN_BASE_URL=https://dashscope.aliyuncs.com/api/v1
+QIANWEN_API_KEY=your_qianwen_api_key_here
+
+# Search Service Configuration
+SEARCH_URL=http://localhost:9487
+
+# Log Configuration
+LOG_DIR=./logs
+LOG_LEVEL=INFO
+LOG_MAX_SIZE=10485760
+LOG_BACKUP_COUNT=5
+LOG_ENABLE_CONSOLE=true
+LOG_ENABLE_FILE=true
+
+# Debug Mode
+DEBUG_MODE=false

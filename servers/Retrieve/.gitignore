@@ -1,0 +1,9 @@
+logs/*
+*.pyc
+py_milvus_test.py
+test_vector_search.py
+.vscode/settings.json
+service/Qwen3-Reranker-0.6B
+test_model_api.py
+test/logs
+.conda/*

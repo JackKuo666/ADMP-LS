@@ -1,0 +1,23 @@
+# Retrieve服务环境变量配置示例
+
+# QA LLM 主模型配置
+QA_LLM_MAIN_API_KEY=your-dashscope-api-key
+QA_LLM_MAIN_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+
+# QA LLM 备用模型配置
+QA_LLM_BACKUP_API_KEY=your-dashscope-api-key
+QA_LLM_BACKUP_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+
+# Rewrite LLM 主模型配置
+REWRITE_LLM_MAIN_API_KEY=your-dashscope-api-key
+REWRITE_LLM_MAIN_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+
+# Rewrite LLM 备用模型配置
+REWRITE_LLM_BACKUP_API_KEY=your-openai-api-key
+REWRITE_LLM_BACKUP_BASE_URL=https://api.openai.com/v1
+
+# Web搜索配置
+SERPER_API_KEY=your-serper-api-key
+
+# 环境配置
+ENVIRONMENT=dev 
