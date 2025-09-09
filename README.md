@@ -103,6 +103,7 @@ Note: place a `.env` file under `client/` (see `client/.env-example.txt`). The c
 ## 🔗 Links
 - **GitHub**: [https://github.com/JackKuo666/ADMP-LS](https://github.com/JackKuo666/ADMP-LS)
 - **Hugging Face Spaces**: [https://huggingface.co/spaces/jackkuo/ADMP-LS](https://huggingface.co/spaces/jackkuo/ADMP-LS)
+- **Demo Video**: [https://youtu.be/wabS5Q6TMBk](https://youtu.be/wabS5Q6TMBk)
 
 
 ## 🙏 Acknowledgements
