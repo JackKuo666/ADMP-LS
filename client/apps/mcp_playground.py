@@ -902,6 +902,9 @@ def main():
                                                             # Save complete content to session history
                                                             _append_message_to_session({'role': 'assistant', 'content': complete_content})
                                                             
+                                                            # Force immediate rerender so Download Options appear without needing a new interaction
+                                                            st.rerun()
+
                                                             handled_final_answer = True
                                                         # Check if this is a final report marker
                                                         elif content == "Final_report\n" and not handled_final_report:
@@ -979,6 +982,9 @@ def main():
                                             _append_message_to_session({'role': 'assistant', 'content': review_final_report_content})
                                             # Also save the original ToolMessage for reference
                                             _append_message_to_session({'role': 'assistant', 'content': '', 'tool': msg.content})
+                                            
+                                            # Force immediate rerender so Download Options appear without needing a new interaction
+                                            st.rerun()
                                         else:
                                             # Save tool message to session history
                                             with st.expander(f"🔧 ToolMessage - {tool_count} ({msg.name})", expanded=False):
@@ -1225,6 +1231,9 @@ def main():
                                                 _append_message_to_session({'role': 'assistant', 'content': '', 'tool': msg.content})
                                                 _append_message_to_session({'role': 'assistant', 'content': complete_content})
                                                 
+                                                # Force immediate rerender so Download Options appear right away
+                                                st.rerun()
+
                                                 # Debug: log ToolMessage save
                                                 logger.log_system_status(f"Saved ToolMessage for bio_qa_stream_chat: {len(msg.content)} characters")
                                                 logger.log_system_status(f"Current chat has {len(st.session_state.get('messages', []))} messages")
@@ -1266,6 +1275,9 @@ def main():
                                                 _append_message_to_session({'role': 'assistant', 'content': extracted_report})
                                                 # Also save the original ToolMessage for reference
                                                 _append_message_to_session({'role': 'assistant', 'content': '', 'tool': msg.content})
+                                                
+                                                # Force immediate rerender so Download Options appear right away
+                                                st.rerun()
                                             else:
                                                 # Fallback: if final report not parsed, display tool message in original way
                                                 with st.expander(f"🔧 ToolMessage - {tool_count} ({msg.name})", expanded=False):
